@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">My Application</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="my_number">+380(00)000-00-00</string>
+    <string name="action_settings">Settings</string>
+</resources>
