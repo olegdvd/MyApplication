@@ -12,5 +12,8 @@
     <string name="mobile_number_lbl">Cell number</string>
     <string name="current_plan_lbl">Current plan</string>
     <string name="get_plan_btn_lbl">Get plan</string>
+    <string name="current_plan">For obtaining of your current plan press GET PLAN</string>
+    <string name="ussd_not_found">Sorry! For this moment we do not know USSD code of your provider to check the current plan  :(</string>
+    <string name="you_can_help_ussd">You can help! Just enter USSD code which shows the name of your current mobile plan. It usually looks like *100# or similar.</string>
 
 </resources>

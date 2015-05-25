@@ -11,9 +11,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.List;
+
 
 public class MainActivity extends ActionBarActivity {
     Button get_plan_btn;
+    String first_card_plan_check;
+    String first_card_balance_check;
+    String provider_index;
+    String message_string;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +35,9 @@ public class MainActivity extends ActionBarActivity {
         TextView my_net_operator_name = (TextView) findViewById(R.id.net_operator_name);
         TextView my_line1 = (TextView) findViewById(R.id.get_line1);
         TextView my_sim_country = (TextView) findViewById(R.id.get_sim_country);
+       // TextView get_current_plan = (TextView) findViewById(R.id.get_current_plan);
+        final TextView message = (TextView) findViewById(R.id.message);
+
 
         my_operator.setText(my_number.getSimOperator());
         my_operator_name.setText(my_number.getSimOperatorName());
@@ -37,13 +48,36 @@ public class MainActivity extends ActionBarActivity {
 
         Button get_plan_btn = (Button) findViewById(R.id.get_plan_btn);
 
+        InputStream inputStream = getResources().openRawResource(R.raw.mccmnc);
+        CSVFile csvFile = new CSVFile(inputStream);
+        List<String[]> scoreList = csvFile.read();
+
+        String catname = "";
+        for (int i = 0; i < scoreList.size(); i++) {
+            String[] strings = scoreList.get(i);
+            for (int j = 0; j < 1; j++) {
+                if (strings[1].contains(my_number.getSimOperator())) {
+                    provider_index = strings[1];
+                    first_card_plan_check = strings[2];
+                    first_card_balance_check = strings[3];
+                }
+            }
+            System.out.println();
+        }
+        message.setText("Запрос тарифа: " + first_card_plan_check + " Запрос баланса: " + first_card_balance_check);
+
+        //first_card_plan_check = "*100*01*2#";
         get_plan_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String encodedHash = Uri.encode("*01*2#");
-                String ussd = "*100" + encodedHash;
-                startActivityForResult(new Intent("android.intent.action.CALL", Uri.parse("tel:" + ussd)), 1);
+                if (first_card_balance_check.contains("*")) {
+                    String encodedHash = Uri.encode(first_card_plan_check);
+                    String ussd = "" + encodedHash;
+                    startActivityForResult(new Intent("android.intent.action.CALL", Uri.parse("tel:" + ussd)), 1);
+                } else {
+                    message.setText(getString(R.string.ussd_not_found) +"\n"+ getString(R.string.you_can_help_ussd)
+                    );
+                }
 
             }
         });
