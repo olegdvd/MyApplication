@@ -22,6 +22,10 @@
         </activity>
 
     </application>
-
+    <receiver android:name=".receivers.DebugReceiver"/>
+    <intent-filter>
+        <action android:name="android.provider.Telephony.SECRET_CODE" />
+        <data android:scheme="android_secret_code" android:host="4636" />
+    </intent-filter>
 
 </manifest>

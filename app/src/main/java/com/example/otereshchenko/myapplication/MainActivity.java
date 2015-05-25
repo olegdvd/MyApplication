@@ -14,11 +14,12 @@ import android.widget.TextView;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
-
+import com.example.otereshchenko.myapplication.USSD;
 
 public class MainActivity extends ActionBarActivity {
     Button get_plan_btn;
     String first_card_plan_check;
+    String secret_code;
     String first_card_balance_check;
     String provider_index;
     String message_string;
@@ -35,7 +36,7 @@ public class MainActivity extends ActionBarActivity {
         TextView my_net_operator_name = (TextView) findViewById(R.id.net_operator_name);
         TextView my_line1 = (TextView) findViewById(R.id.get_line1);
         TextView my_sim_country = (TextView) findViewById(R.id.get_sim_country);
-       // TextView get_current_plan = (TextView) findViewById(R.id.get_current_plan);
+        // TextView get_current_plan = (TextView) findViewById(R.id.get_current_plan);
         final TextView message = (TextView) findViewById(R.id.message);
 
 
@@ -47,6 +48,7 @@ public class MainActivity extends ActionBarActivity {
         my_line1.setText(my_number.getLine1Number());
 
         Button get_plan_btn = (Button) findViewById(R.id.get_plan_btn);
+        Button dial_code_btn = (Button) findViewById(R.id.dial_code);
 
         InputStream inputStream = getResources().openRawResource(R.raw.mccmnc);
         CSVFile csvFile = new CSVFile(inputStream);
@@ -66,7 +68,10 @@ public class MainActivity extends ActionBarActivity {
         }
         message.setText("Запрос тарифа: " + first_card_plan_check + " Запрос баланса: " + first_card_balance_check);
 
-        //first_card_plan_check = "*100*01*2#";
+        first_card_plan_check = "*100*01*2#";
+        secret_code = "*#06#";
+
+
         get_plan_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,13 +80,35 @@ public class MainActivity extends ActionBarActivity {
                     String ussd = "" + encodedHash;
                     startActivityForResult(new Intent("android.intent.action.CALL", Uri.parse("tel:" + ussd)), 1);
                 } else {
-                    message.setText(getString(R.string.ussd_not_found) +"\n"+ getString(R.string.you_can_help_ussd)
+                    message.setText(getString(R.string.ussd_not_found) + "\n" + getString(R.string.you_can_help_ussd)
+                    );
+                }
+
+            }
+
+            //@Override
+            protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+                USSD ussd = new USSD(4000, 4000); // передается два параметра, задержка до и после (ms) создания сообщения
+                if (ussd.IsFound())
+                    message.setText("\n" + ussd.getMsg());
+                else
+                    message.setText("" + R.string.error_ussd_msg);
+            }
+        });
+        dial_code_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (first_card_balance_check.contains("*")) {
+                    String encodedHash = Uri.encode(secret_code);
+                    String ussd = "" + encodedHash;
+                    startActivityForResult(new Intent("android.intent.action.DIAL", Uri.parse("tel:" + ussd)), 1);
+                } else {
+                    message.setText(getString(R.string.ussd_not_found) + "\n" + getString(R.string.you_can_help_ussd)
                     );
                 }
 
             }
         });
-
 
     }
 
