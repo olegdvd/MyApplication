@@ -21,11 +21,30 @@
             </intent-filter>
         </activity>
 
-    </application>
-    <receiver android:name=".receivers.DebugReceiver"/>
-    <intent-filter>
-        <action android:name="android.provider.Telephony.SECRET_CODE" />
-        <data android:scheme="android_secret_code" android:host="4636" />
-    </intent-filter>
+        <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-</manifest>
+        <service
+            android:name="com.example.otereshchenko.myapplication.services.CDUSSDService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.ussd.IExtendedNetworkService" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name="com.example.otereshchenko.myapplication.receivers.CDBootCompleteRcv">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+
+<receiver android:name=".receivers.DebugReceiver" /><intent-filter>
+<action android:name="android.provider.Telephony.SECRET_CODE" />
+<data
+    android:scheme="android_secret_code"
+    android:host="4636" />
+</intent-filter>
+
+    </manifest>

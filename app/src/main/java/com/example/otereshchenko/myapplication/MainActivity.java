@@ -1,10 +1,14 @@
 package com.example.otereshchenko.myapplication;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +27,12 @@ public class MainActivity extends ActionBarActivity {
     String first_card_balance_check;
     String provider_index;
     String message_string;
+
+    public static final String TAG = MainActivity.class.getSimpleName();
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +63,15 @@ public class MainActivity extends ActionBarActivity {
         InputStream inputStream = getResources().openRawResource(R.raw.mccmnc);
         CSVFile csvFile = new CSVFile(inputStream);
         List<String[]> scoreList = csvFile.read();
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+               // updateUI (intent);
+                //intent.getIntExtra()
+                System.out.println ("Intent: "+ intent);
+            }
+        };
+
 
         String catname = "";
         for (int i = 0; i < scoreList.size(); i++) {
@@ -110,8 +129,20 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        registerReceiver(broadcastReceiver, new IntentFilter(Intent.ACTION_GET_CONTENT));
+    }
+    @Override
+    public void onDestroy() {
+        Log.i(TAG, "unregister");
+        unregisterReceiver(broadcastReceiver);
+        super.onDestroy();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

@@ -3,7 +3,7 @@ package com.example.otereshchenko.myapplication;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Calendar;
+import java.lang.Integer;import java.lang.Process;import java.lang.Runtime;import java.lang.String;import java.lang.System;import java.util.Calendar;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,6 +44,7 @@ public class USSD {
             boolean tostop=false;
             long stop=timestamp+after; //to stop the while after "after" ms
             while (((line = mReader.readLine()) != null)&&(System.currentTimeMillis()<stop)&&(tostop==false)) {
+                System.out.println("\n"+"USSDTest " + line);
                 if (line.length()>19) //the line should be at least with a length of a timestamp (19) !
                 {
                     if (line.contains(startmsg)) //check if it is a USSD msg

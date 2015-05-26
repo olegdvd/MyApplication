@@ -17,4 +17,8 @@
     <string name="you_can_help_ussd">You can help! Just enter USSD code which shows the name of your current mobile plan. It usually looks like *100# or similar.</string>
     <string name="error_ussd_msg">USSD code ERROR</string>
 
+    <string name="uri_scheme">ussd</string>
+    <string name="uri_authority">cd</string>
+    <string name="uri_path">/</string>
+    <string name="uri_param_name">uval</string>
 </resources>
