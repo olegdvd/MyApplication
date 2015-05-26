@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Мій додаток</string>
+
+    <string name="my_number">+380(00)000-00-00</string>
+    <string name="action_settings">Налаштування</string>
+    <string name="sim_operator_lbl">Оператор SIM</string>
+    <string name="network_operator_name_lbl">Назва оператора мережі</string>
+    <string name="sim_country_lbl">Країна SIM </string>
+    <string name="current_plan_lbl">Поточний тариф</string>
+    <string name="get_plan_btn_lbl">Отримай тариф</string>
+    <string name="mobile_number_lbl">Номер мобільного</string>
+    <string name="network_operator_lbl">Оператор мережі</string>
+    <string name="sim_operator_name_lbl">Назва SIM оператора</string>
+    <string name="hello_world">Привіт, Світ!</string>
+    <string name="current_plan">Щоб отримати поточний тариф натисніть "Отримай тариф"</string>
+    <string name="ussd_not_found">Вибачте! Ми поки що не знаємо коду для перевірки тарифу вашого оператора :(</string>
+    <string name="you_can_help_ussd">Ви можете допомогти! Просто наберіть USSD код, що вертає назву вашого тарифу. Звичайно, щось накшталт *101#</string>
+    <string name="error_ussd_msg" translatable="false">Помилка USSD коду</string>
+
+</resources>

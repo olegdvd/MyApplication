@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Мое Приложение</string>
+
+    <string name="hello_world">Привет, Мир!</string>
+    <string name="my_number">+380(00)0000000</string>
+    <string name="action_settings">Настройки</string>
+    <string name="sim_operator_lbl">Оператор SIM</string>
+    <string name="sim_operator_name_lbl">Имя SIM оператора</string>
+    <string name="network_operator_lbl">Оператор сети</string>
+    <string name="network_operator_name_lbl">Имя оператора сети</string>
+    <string name="sim_country_lbl">Страна SIM</string>
+    <string name="mobile_number_lbl">Номер мобильного</string>
+    <string name="current_plan_lbl">Текущий тариф</string>
+    <string name="get_plan_btn_lbl">Получить тариф</string>
+    <string name="current_plan">Чтобы получить текущий тариф нажмите "Получить тариф"</string>
+    <string name="ussd_not_found">Извините! Мы пока не знаем USSD код для проверки тарифа у вашего оператора :(</string>
+    <string name="you_can_help_ussd">Вы можете помочь! Просто введите USSD код, который возвращает название вашего тарифа в сообщении. Обычно что-то вроде *101#</string>
+    <string name="error_ussd_msg">Ошибка USSD кода</string>
+
+
+</resources>
