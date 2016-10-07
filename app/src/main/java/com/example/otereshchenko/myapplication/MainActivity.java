@@ -135,12 +135,12 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public void onResume() {
         super.onResume();
-        registerReceiver(broadcastReceiver, new IntentFilter(Intent.ACTION_GET_CONTENT));
+       // registerReceiver(broadcastReceiver, new IntentFilter(Intent.ACTION_GET_CONTENT));
     }
     @Override
     public void onDestroy() {
         Log.i(TAG, "unregister");
-        unregisterReceiver(broadcastReceiver);
+       // unregisterReceiver(broadcastReceiver);
         super.onDestroy();
     }
     @Override
